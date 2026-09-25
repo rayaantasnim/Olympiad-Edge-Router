@@ -1,0 +1,6 @@
+{
+  "name": "Olympiad Edge Ecosystem Router",
+  "description": "Ultra-futuristic, high-velocity central router for the Olympiad Edge Ecosystem created by Rayaan Tasnim.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

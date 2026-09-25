@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Olympiad Edge Ecosystem Router</title>
+  <meta name="description" content="Ultra-futuristic, high-velocity central router for the Olympiad Edge Ecosystem created by Rayaan Tasnim." />
+  <meta property="og:title" content="Olympiad Edge Ecosystem Router" />
+  <meta property="og:description" content="Ultra-futuristic, high-velocity central router for the Olympiad Edge Ecosystem created by Rayaan Tasnim." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tab Favicon Configuration -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff007f'/%3E%3Cstop offset='50%25' stop-color='%2300f3ff'/%3E%3Cstop offset='100%25' stop-color='%2300ff66'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,5 95,85 5,85' fill='none' stroke='url(%23g)' stroke-width='8'/%3E%3Ccircle cx='50' cy='55' r='14' fill='%2300f3ff'/%3E%3C/svg%3E" />
+
+  <!-- Next-Gen Typography System: Rajdhani, JetBrains Mono, Chakra Petch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Rajdhani', 'Algerian', 'Chakra Petch', 'system-ui', 'sans-serif'],
+            display: ['Rajdhani', 'Algerian', 'Chakra Petch', 'sans-serif'],
+            ui: ['Calibri', 'Vrinda', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+            cyber: ['Rajdhani', 'Algerian', 'Chakra Petch', 'sans-serif'],
+            body: ['Calibri', 'Vrinda', 'Segoe UI', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          colors: {
+            obsidian: '#040308',
+            cyberDark: '#070512',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js & GSAP + ScrollTrigger via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="button.css">
+</head>
+<body class="bg-obsidian text-slate-100 antialiased selection:bg-pink-600 selection:text-white relative min-h-screen">
+
+  <!-- 3D Cosmic Three.js Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- Interactive Neon Lighting Trail -->
+  <div id="cursor-glow"></div>
+
+  <!-- ========================================================================= -->
+  <!-- DUAL NAVIGATION PROTOCOLS -->
+  <!-- ========================================================================= -->
+
+  <!-- PROTOCOL 1 TRIGGER: Top-Right Global Router Navbar -->
+  <header class="fixed top-3 right-3 sm:top-5 sm:right-5 md:top-7 md:right-8 z-40">
+    <button id="globalRouterToggle" aria-label="Toggle Global Router Menu" class="relative group flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl glass-panel border border-pink-500/40 text-slate-100 hover:text-white shadow-[0_0_20px_rgba(255,0,127,0.25)] hover:shadow-[0_0_30px_rgba(255,0,127,0.5)] transition-all duration-300">
+      <span class="w-2 h-2 rounded-full bg-pink-500 animate-pulse shadow-[0_0_8px_#ff007f]"></span>
+      <span class="font-ui font-bold tracking-wider text-xs uppercase flex items-center gap-1.5">
+        <span>🌐</span>
+        <span class="hidden xs:inline">Global Nodes</span>
+      </span>
+      <svg id="hamburgerIcon" class="w-4 h-4 sm:w-5 sm:h-5 text-pink-400 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </header>
+
+  <!-- RIGHT NAVBAR OVERLAY: Exactly 50% width on desktop, 100% on mobile -->
+  <div id="globalRouterOverlay" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-md transition-opacity duration-300">
+    <div id="globalRouterDrawer" class="absolute top-0 right-0 h-full w-full md:w-1/2 bg-[#080512]/95 backdrop-blur-2xl border-l border-pink-500/40 shadow-[0_0_60px_rgba(255,0,127,0.35)] p-4 sm:p-7 md:p-10 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 sm:pb-5 mb-4 sm:mb-6 border-b border-pink-500/30">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl sm:text-2xl">💎</span>
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-pink-400">Gemstone Routing · v4.5</span>
+              <h3 class="font-heading font-extrabold text-lg sm:text-2xl tracking-wide text-white">GLOBAL NODES HUB</h3>
+            </div>
+          </div>
+          <button id="closeGlobalRouterBtn" aria-label="Close Router" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-white/5 hover:bg-pink-500/20 text-slate-300 hover:text-white border border-white/10 transition-colors font-ui text-xs">
+            <span class="hidden sm:inline">CLOSE</span>
+            <span class="text-sm">✕</span>
+          </button>
+        </div>
+
+        <p class="font-ui text-xs text-slate-300 mb-4 sm:mb-6">
+          High-velocity external nodes routing across the Olympiad Edge multi-tiered developer ecosystem. Tap any crystal node below to launch external environment.
+        </p>
+
+        <nav class="space-y-2.5 sm:space-y-3 font-ui">
+          <!-- 1. Core Portal (Amethyst) -->
+          <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-amethyst flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-fuchsia-500/30 hover:border-fuchsia-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🚀</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-fuchsia-300 transition-colors flex items-center gap-1.5">
+                  <span>Core Portal</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300 font-mono">AMETHYST</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.io · Central Engine & Roadmap</p>
+              </div>
+            </div>
+            <span class="text-fuchsia-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+
+          <!-- 2. Novice Vetting Hub (Sapphire) -->
+          <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-sapphire flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-blue-500/30 hover:border-blue-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🔍</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-blue-300 transition-colors flex items-center gap-1.5">
+                  <span>Novice Vetting Hub</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">SAPPHIRE</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.io · Diagnostic Evaluation & Logic Checks</p>
+              </div>
+            </div>
+            <span class="text-blue-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+
+          <!-- 3. For The Newbie Runway (Aquamarine / Cyan) -->
+          <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-sapphire flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-cyan-500/30 hover:border-cyan-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🛫</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-cyan-300 transition-colors flex items-center gap-1.5">
+                  <span>For The Newbie Runway</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono">AQUAMARINE</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.io · Entry Velocity Path & Focus Blueprint</p>
+              </div>
+            </div>
+            <span class="text-cyan-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+
+          <!-- 4. Central Asset Archive (Emerald) -->
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-emerald flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-emerald-500/30 hover:border-emerald-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🗄️</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-emerald-300 transition-colors flex items-center gap-1.5">
+                  <span>Central Asset Archive</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">EMERALD</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.com · Decentralized Open-Source Repository</p>
+              </div>
+            </div>
+            <span class="text-emerald-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+
+          <!-- 5. PrimeFactor.app Tournament (Fiery Ruby) -->
+          <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-ruby flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-rose-500/30 hover:border-rose-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">⚔️</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-rose-300 transition-colors flex items-center gap-1.5">
+                  <span>PrimeFactor.app Tournament</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono">RUBY</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.io · Mental Math Arena & 180s Timed Challenge</p>
+              </div>
+            </div>
+            <span class="text-rose-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+
+          <!-- 6. Quantum Prime Engine (Topaz Gold) -->
+          <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="crystal-card gem-pill-topaz flex items-center justify-between p-3 sm:p-3.5 rounded-xl border border-yellow-500/30 hover:border-yellow-400 group">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">⚡</span>
+              <div>
+                <p class="font-heading font-bold text-sm text-white group-hover:text-yellow-300 transition-colors flex items-center gap-1.5">
+                  <span>Quantum Prime Engine</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-300 font-mono">TOPAZ</span>
+                </p>
+                <p class="font-mono text-[11px] text-slate-400">github.io · 10^40 Heavy-Duty Real-Time Calculator</p>
+              </div>
+            </div>
+            <span class="text-yellow-400 text-xs sm:text-sm group-hover:translate-x-1.5 transition-transform font-mono">LAUNCH ↗</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400">
+        <span>Olympiad Edge Ecosystem</span>
+        <span>Authorized By Rayaan Tasnim</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROTOCOL 2 TRIGGER: Left-Corner Floating Map Matrix Navbar -->
+  <aside class="fixed top-3 left-3 sm:top-5 sm:left-5 md:top-7 md:left-8 z-40">
+    <button id="mapMatrixToggle" aria-label="Toggle Map Matrix Navigation" class="relative group flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl glass-panel border border-cyan-500/40 text-slate-100 hover:text-white shadow-[0_0_20px_rgba(0,243,255,0.25)] hover:shadow-[0_0_30px_rgba(0,243,255,0.5)] transition-all duration-300">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping shadow-[0_0_8px_#00f3ff]"></span>
+      <span class="font-ui font-bold tracking-wider text-xs uppercase flex items-center gap-1.5">
+        <span>🗺️</span>
+        <span class="hidden xs:inline">Map Matrix</span>
+      </span>
+      <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <rect x="3" y="3" width="7" height="7" stroke-width="2"/>
+        <rect x="14" y="3" width="7" height="7" stroke-width="2"/>
+        <rect x="14" y="14" width="7" height="7" stroke-width="2"/>
+        <rect x="3" y="14" width="7" height="7" stroke-width="2"/>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- UPGRADE 1: FULL-SCREEN OVERLAY SYSTEM MAP MATRIX -->
+  <div id="mapMatrixOverlay" class="hidden fixed inset-0 z-50 w-screen h-screen bg-[#04020c]/95 backdrop-blur-2xl overflow-y-auto flex flex-col p-4 sm:p-6 md:p-10 transition-opacity duration-300">
+    <!-- Header bar -->
+    <div class="max-w-7xl w-full mx-auto flex items-center justify-between pb-4 sm:pb-6 mb-4 sm:mb-6 border-b border-cyan-500/30">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <span class="text-xl sm:text-2xl">🗺️</span>
+        <div>
+          <span class="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-cyan-400">Topological Routing Protocol // System Map Matrix</span>
+          <h2 class="font-heading font-extrabold text-xl sm:text-3xl text-white tracking-wide">SYSTEM TOPOLOGY MATRIX</h2>
+        </div>
+      </div>
+      <button id="closeMapMatrixBtn" aria-label="Close Map Matrix" class="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 text-slate-200 hover:text-white border border-white/10 hover:border-cyan-400/50 transition-all font-ui text-xs font-semibold">
+        <span class="hidden sm:inline">CLOSE [ESC]</span>
+        <span class="text-sm sm:text-base leading-none">✕</span>
+      </button>
+    </div>
+
+    <!-- Main Content Container: Desktop Grid vs Mobile Vertical Stack -->
+    <div class="max-w-7xl w-full mx-auto flex-1 pb-10">
+      <p class="font-ui text-xs sm:text-sm text-slate-300 mb-4 sm:mb-6 font-normal">
+        Select any topological anchor or expand parent sections to route directly to internal card sub-anchors. On desktop, this spans an expansive system matrix; on mobile devices, all nodes stack cleanly vertically for seamless touch navigation.
+      </p>
+
+      <!-- 8 Main Top-Level Anchors: 1 col on mobile, 2 cols on md, 4 cols on lg -->
+      <nav id="matrixNavList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4.5">
+        <!-- 1. Hero Banner -->
+        <div class="crystal-card p-3.5 sm:p-4 rounded-2xl border border-pink-500/30 hover:border-pink-500 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-pink-400 pb-2 border-b border-white/5">
+              <span>NODE // 01</span>
+              <span>INIT</span>
+            </div>
+            <h4 class="font-heading font-bold text-base sm:text-lg text-white mt-2 flex items-center gap-2">
+              <span>🌌</span> <span>Hero Banner</span>
+            </h4>
+            <p class="font-ui text-xs text-slate-400 mt-1">Ecosystem parameters, GSAP entrance reveals & telemetry metrics.</p>
+          </div>
+          <a href="#hero" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-pink-400 hover:text-pink-300 transition-colors">
+            JUMP TO HERO →
+          </a>
+        </div>
+
+        <!-- 2. Platform Foundations (Accordion Parent) -->
+        <div class="crystal-card gem-pill-amethyst p-3.5 sm:p-4 rounded-2xl border border-fuchsia-500/30 hover:border-fuchsia-400 transition-all flex flex-col justify-between accordion-item">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-fuchsia-400 pb-2 border-b border-white/5">
+              <span>NODE // 02 · AMETHYST</span>
+              <span>5 CARDS</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 cursor-pointer" onclick="toggleAccordion('acc-foundations')">
+              <h4 class="font-heading font-bold text-base sm:text-lg text-white flex items-center gap-2">
+                <span>🔮</span> <span>Platform Foundations</span>
+              </h4>
+              <span class="acc-chevron text-xs text-fuchsia-400 transition-transform duration-300">▼</span>
+            </div>
+            <p class="font-ui text-xs text-slate-400 mt-1">Syntactic mastery, workspace rig, and beginner runway.</p>
+            <div id="acc-foundations" class="accordion-content hidden mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs font-mono text-slate-300">
+              <a href="#card-s1c1" class="block hover:text-fuchsia-300 py-1 transition-colors">🕹️ Command Hub (Site 01)</a>
+              <a href="#card-s1c2" class="block hover:text-fuchsia-300 py-1 transition-colors">⚙️ Workspace Rig (Site 02)</a>
+              <a href="#card-s1c3" class="block hover:text-fuchsia-300 py-1 transition-colors">🛫 For The Newbie Runway</a>
+              <a href="#card-s1c4" class="block hover:text-fuchsia-300 py-1 transition-colors">🚪 Master Portal Entry</a>
+              <a href="#card-s1c5" class="block hover:text-fuchsia-300 py-1 transition-colors">📚 Global Knowledge Base</a>
+            </div>
+          </div>
+          <a href="#section-foundations" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-fuchsia-400 hover:text-fuchsia-300 transition-colors">
+            NAVIGATE SECTION →
+          </a>
+        </div>
+
+        <!-- 3. Full-Stack Engineering (Accordion Parent) -->
+        <div class="crystal-card gem-pill-emerald p-3.5 sm:p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition-all flex flex-col justify-between accordion-item">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-emerald-400 pb-2 border-b border-white/5">
+              <span>NODE // 03 · EMERALD</span>
+              <span>4 CARDS</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 cursor-pointer" onclick="toggleAccordion('acc-fullstack')">
+              <h4 class="font-heading font-bold text-base sm:text-lg text-white flex items-center gap-2">
+                <span>❇️</span> <span>Full-Stack Engineering</span>
+              </h4>
+              <span class="acc-chevron text-xs text-emerald-400 transition-transform duration-300">▼</span>
+            </div>
+            <p class="font-ui text-xs text-slate-400 mt-1">Modern UI, peer synergies, Git CLI pipelines, and cloud capstones.</p>
+            <div id="acc-fullstack" class="accordion-content hidden mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs font-mono text-slate-300">
+              <a href="#card-s2c1" class="block hover:text-emerald-300 py-1 transition-colors">🎨 UI/UX Architecture</a>
+              <a href="#card-s2c2" class="block hover:text-emerald-300 py-1 transition-colors">🤝 Peer Synergy Network</a>
+              <a href="#card-s2c3" class="block hover:text-emerald-300 py-1 transition-colors">💻 Pipeline Operations (Git CLI)</a>
+              <a href="#card-s2c4" class="block hover:text-emerald-300 py-1 transition-colors">🏆 Capstone Directory</a>
+            </div>
+          </div>
+          <a href="#section-fullstack" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors">
+            NAVIGATE SECTION →
+          </a>
+        </div>
+
+        <!-- 4. Vetting & Career Systems (Accordion Parent) -->
+        <div class="crystal-card gem-pill-sapphire p-3.5 sm:p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 transition-all flex flex-col justify-between accordion-item">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-cyan-400 pb-2 border-b border-white/5">
+              <span>NODE // 04 · SAPPHIRE</span>
+              <span>4 CARDS</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 cursor-pointer" onclick="toggleAccordion('acc-vetting')">
+              <h4 class="font-heading font-bold text-base sm:text-lg text-white flex items-center gap-2">
+                <span>💎</span> <span>Vetting & Career Systems</span>
+              </h4>
+              <span class="acc-chevron text-xs text-cyan-400 transition-transform duration-300">▼</span>
+            </div>
+            <p class="font-ui text-xs text-slate-400 mt-1">Diagnostic sanity, 5-part architecture exam, and placement.</p>
+            <div id="acc-vetting" class="accordion-content hidden mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs font-mono text-slate-300">
+              <a href="#card-s3c1" class="block hover:text-cyan-300 py-1 transition-colors">🩺 Novice Vetting Hub</a>
+              <a href="#card-s3c2" class="block hover:text-cyan-300 py-1 transition-colors">📐 Architectural Exam (5-Part)</a>
+              <a href="#card-s3c3" class="block hover:text-cyan-300 py-1 transition-colors">🧬 The T-Shaped Matrix</a>
+              <a href="#card-s3c4" class="block hover:text-cyan-300 py-1 transition-colors">🏛️ Enterprise Placement</a>
+            </div>
+          </div>
+          <a href="#section-vetting" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors">
+            NAVIGATE SECTION →
+          </a>
+        </div>
+
+        <!-- 5. PrimeFactor Arena (Accordion Parent) -->
+        <div class="crystal-card gem-pill-ruby p-3.5 sm:p-4 rounded-2xl border border-rose-500/30 hover:border-rose-400 transition-all flex flex-col justify-between accordion-item">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-rose-400 pb-2 border-b border-white/5">
+              <span>NODE // 05 · RUBY</span>
+              <span>5 CARDS</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 cursor-pointer" onclick="toggleAccordion('acc-primefactor')">
+              <h4 class="font-heading font-bold text-base sm:text-lg text-white flex items-center gap-2">
+                <span>🔴</span> <span>PrimeFactor Arena</span>
+              </h4>
+              <span class="acc-chevron text-xs text-rose-400 transition-transform duration-300">▼</span>
+            </div>
+            <p class="font-ui text-xs text-slate-400 mt-1">180s mental math tournament, 10 tiers, and number theory.</p>
+            <div id="acc-primefactor" class="accordion-content hidden mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs font-mono text-slate-300">
+              <a href="#card-s4c1" class="block hover:text-rose-300 py-1 transition-colors">⏱️ Speed Laboratory</a>
+              <a href="#card-s4c2" class="block hover:text-rose-300 py-1 transition-colors">📊 Range Matrix Grid (10 Tiers)</a>
+              <a href="#card-s4c3" class="block hover:text-rose-300 py-1 transition-colors">🎛️ Configurator Node (Tier 9)</a>
+              <a href="#card-s4c4" class="block hover:text-rose-300 py-1 transition-colors">🧪 Pedagogical Sandbox</a>
+              <a href="#card-s4c5" class="block hover:text-rose-300 py-1 transition-colors">🧮 Deterministic Stack</a>
+            </div>
+          </div>
+          <a href="#section-primefactor" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-rose-400 hover:text-rose-300 transition-colors">
+            NAVIGATE SECTION →
+          </a>
+        </div>
+
+        <!-- 6. Hyper-Scale Calculations (Accordion Parent) -->
+        <div class="crystal-card gem-pill-topaz p-3.5 sm:p-4 rounded-2xl border border-yellow-500/30 hover:border-yellow-400 transition-all flex flex-col justify-between accordion-item">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-yellow-400 pb-2 border-b border-white/5">
+              <span>NODE // 06 · TOPAZ</span>
+              <span>4 CARDS</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 cursor-pointer" onclick="toggleAccordion('acc-hyperscale')">
+              <h4 class="font-heading font-bold text-base sm:text-lg text-white flex items-center gap-2">
+                <span>⚡</span> <span>Hyper-Scale Calculations</span>
+              </h4>
+              <span class="acc-chevron text-xs text-yellow-400 transition-transform duration-300">▼</span>
+            </div>
+            <p class="font-ui text-xs text-slate-400 mt-1">10^40 Quantum Prime Engine, Speech APIs, and Double-Helix.</p>
+            <div id="acc-hyperscale" class="accordion-content hidden mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs font-mono text-slate-300">
+              <a href="#card-s5c1" class="block hover:text-yellow-300 py-1 transition-colors">📦 Decentralized Repository</a>
+              <a href="#card-s5c2" class="block hover:text-yellow-300 py-1 transition-colors">⚛️ Quantum Prime Engine (10^40)</a>
+              <a href="#card-s5c3" class="block hover:text-yellow-300 py-1 transition-colors">🎙️ Voice Command Matrix</a>
+              <a href="#card-s5c4" class="block hover:text-yellow-300 py-1 transition-colors">🧬 Double-Helix Core</a>
+            </div>
+          </div>
+          <a href="#section-hyperscale" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-yellow-400 hover:text-yellow-300 transition-colors">
+            NAVIGATE SECTION →
+          </a>
+        </div>
+
+        <!-- 7. Portfolio Showroom Terminal -->
+        <div class="crystal-card p-3.5 sm:p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-purple-400 pb-2 border-b border-white/5">
+              <span>NODE // 07</span>
+              <span>CLI CONSOLE</span>
+            </div>
+            <h4 class="font-heading font-bold text-base sm:text-lg text-white mt-2 flex items-center gap-2">
+              <span>💻</span> <span>Portfolio Showroom Terminal</span>
+            </h4>
+            <p class="font-ui text-xs text-slate-400 mt-1">Interactive CLI terminal console with node filtering and diagnostics.</p>
+          </div>
+          <a href="#section-portfolio" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-purple-400 hover:text-purple-300 transition-colors">
+            LAUNCH TERMINAL →
+          </a>
+        </div>
+
+        <!-- 8. Ending Footer -->
+        <div class="crystal-card p-3.5 sm:p-4 rounded-2xl border border-slate-500/30 hover:border-slate-400 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 pb-2 border-b border-white/5">
+              <span>NODE // 08</span>
+              <span>AUTH & COPYRIGHT</span>
+            </div>
+            <h4 class="font-heading font-bold text-base sm:text-lg text-white mt-2 flex items-center gap-2">
+              <span>🛡️</span> <span>Ending Footer</span>
+            </h4>
+            <p class="font-ui text-xs text-slate-400 mt-1">Platform credentials, system authorization & copyright index.</p>
+          </div>
+          <a href="#footer" class="matrix-link mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-slate-300 hover:text-white transition-colors">
+            TO FOOTER →
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER -->
+  <!-- ========================================================================= -->
+  <main class="relative z-10 w-full">
+
+    <!-- HERO BANNER -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-20 sm:pt-28 pb-12 sm:pb-16 relative">
+      <div class="max-w-4xl mx-auto space-y-4 sm:space-y-6">
+        <div class="hero-badge inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full glass-panel border border-pink-500/30 text-[10px] sm:text-xs font-mono text-pink-300">
+          <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-pink-500 animate-pulse"></span>
+          <span>OLYMPIAD EDGE ARCHITECTURE · AUTHORIZED BY RAYAAN TASNIM</span>
+        </div>
+
+        <h1 class="hero-title font-display text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase leading-none text-white">
+          Olympiad Edge <br/>
+          <span class="bg-gradient-to-r from-pink-500 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">Ecosystem Router</span>
+        </h1>
+
+        <p class="hero-sub font-body text-sm sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed font-normal px-2">
+          An ultra-futuristic, high-velocity central router synthesizing competitive programming discipline with production-scale SaaS architecture across 23 specialized engineering nodes.
+        </p>
+
+        <!-- Dynamic Action Row -->
+        <div class="hero-actions flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+          <a href="#section-foundations" class="cyber-btn-cut px-5 py-3 sm:px-7 sm:py-3.5 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(255,0,127,0.4)] hover:shadow-[0_0_35px_rgba(255,0,127,0.7)] hover:-translate-y-0.5">
+            Initialize Grid Matrix ↓
+          </a>
+          <a href="#section-portfolio" class="cyber-btn-cut px-5 py-3 sm:px-7 sm:py-3.5 glass-panel border border-cyan-400/40 hover:border-cyan-400 text-cyan-300 hover:text-white font-cyber font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(0,243,255,0.2)] hover:shadow-[0_0_30px_rgba(0,243,255,0.5)] hover:-translate-y-0.5">
+            Launch Showroom Terminal >_
+          </a>
+        </div>
+
+        <!-- Telemetry Metrics Bar: Compact on Mobile -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-3xl mx-auto pt-6 sm:pt-8 text-left">
+          <div class="p-2.5 sm:p-3 rounded-xl glass-panel border border-white/5">
+            <span class="block text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-widest">Topology</span>
+            <span class="font-display font-bold text-base sm:text-lg text-white">5 Sections</span>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl glass-panel border border-white/5">
+            <span class="block text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-widest">Production Nodes</span>
+            <span class="font-display font-bold text-base sm:text-lg text-pink-400">23 Cards</span>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl glass-panel border border-white/5">
+            <span class="block text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-widest">Computational Range</span>
+            <span class="font-display font-bold text-base sm:text-lg text-cyan-400">Up to 10^40</span>
+          </div>
+          <div class="p-2.5 sm:p-3 rounded-xl glass-panel border border-white/5">
+            <span class="block text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-widest">Status Protocol</span>
+            <span class="font-display font-bold text-base sm:text-lg text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400"></span> Online</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTAINER FOR THE 5 SPECIALIZED SECTIONS (CONTAINING 23 DETAILED CARDS) -->
+    <div id="sections-container" class="space-y-12 sm:space-y-20 pb-16"></div>
+
+    <!-- SECTION 07: PORTFOLIO SHOWROOM TERMINAL -->
+    <section id="section-portfolio" class="max-w-7xl mx-auto px-6 py-20">
+      <div class="p-8 md:p-10 rounded-3xl glass-panel border border-purple-500/40 shadow-[0_0_50px_rgba(112,0,255,0.3)]">
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 mb-6 border-b border-white/10 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 font-mono text-xs text-purple-400 uppercase tracking-wider mb-1">
+              <span class="w-2 h-2 rounded-full bg-purple-500 animate-ping"></span> Interactive Console
+            </div>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Portfolio Showroom Terminal</h2>
+          </div>
+          <!-- Terminal Filter Buttons -->
+          <div id="terminalFilterBtns" class="flex flex-wrap items-center gap-2 font-mono text-xs">
+            <button onclick="filterTerminal('all')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-white font-semibold shadow-sm transition-colors">ALL (23)</button>
+            <button onclick="filterTerminal('S1')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-pink-500/20 text-slate-300 hover:text-pink-300 border border-white/5 transition-colors">S1 Foundations</button>
+            <button onclick="filterTerminal('S2')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/5 transition-colors">S2 Full-Stack</button>
+            <button onclick="filterTerminal('S3')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-white/5 transition-colors">S3 Vetting</button>
+            <button onclick="filterTerminal('S4')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 border border-white/5 transition-colors">S4 PrimeFactor</button>
+            <button onclick="filterTerminal('S5')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-yellow-500/20 text-slate-300 hover:text-yellow-300 border border-white/5 transition-colors">S5 Quantum</button>
+          </div>
+        </div>
+
+        <!-- Terminal Interactive Screen -->
+        <div class="bg-black/90 rounded-2xl p-6 border border-white/10 font-mono text-xs space-y-4 shadow-inner">
+          <div class="flex items-center justify-between text-slate-500 border-b border-white/5 pb-2">
+            <span>root@olympiad-edge:~# node router-cli.js</span>
+            <span class="text-emerald-400">SYSTEM HEALTHY</span>
+          </div>
+
+          <!-- Interactive CLI Input -->
+          <div class="flex items-center gap-2 text-slate-200">
+            <span class="text-pink-400 font-bold">></span>
+            <input id="terminalCliInput" type="text" placeholder="Type 'help', 'nodes', 'clear', or search node name (e.g. 'speed', 'python')..." class="bg-transparent border-none outline-none w-full text-white placeholder-slate-600 font-mono" />
+            <button onclick="executeTerminalCommand()" class="px-3 py-1 bg-purple-600/60 hover:bg-purple-600 text-white rounded text-[11px] font-cyber tracking-wider uppercase transition-colors">RUN</button>
+          </div>
+
+          <!-- CLI Log Output Box -->
+          <div id="terminalOutputLog" class="space-y-1.5 max-h-48 overflow-y-auto text-slate-400 pt-2 border-t border-white/5 font-mono text-[11px]">
+            <p class="text-cyan-400">[SYSTEM] Olympiad Edge Ecosystem Router CLI initialized.</p>
+            <p class="text-slate-300">[INFO] Ready to route. Type any command or click nodes below to jump directly.</p>
+          </div>
+        </div>
+
+        <!-- Dynamic Node Grid inside Showroom -->
+        <div id="showroomNodesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pt-6"></div>
+      </div>
+    </section>
+
+    
+  </main>
+
+    <main class="w-full max-w-6xl mx-auto space-y-6 sm:space-y-8">
+        
+        <!-- Platform Branding Header -->
+        <header class="text-center space-y-2 sm:space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs font-semibold tracking-widest text-slate-300 uppercase" style="font-family: var(--font-secondary);">ECOSYSTEM NAVIGATION HUB</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 uppercase">
+                Olympiad Edge Core Wings
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto tracking-wide">
+                Architected by Rayaan Tasnim • Interactive 6-Wing Quantum Gateway
+            </p>
+        </header>
+
+        <div class="perspective-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+
+            <!-- WING 01: Standard Core Hub -->
+            <a href="https://rayaantasnim.github.io/Olympiad-Edge-Join/" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-amethyst group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-purple-950/80 text-purple-300 border border-purple-500/30 tracking-wider">WING 01</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">🗺️</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Standard Core Hub
+                    </h2>
+                    <p class="text-xs sm:text-sm text-purple-200/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        Primary Portal & Membership Access
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-purple-300/80 group-hover:text-purple-200 transition-colors">
+                    <span>LAUNCH HUB</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- WING 02: Novice Assessments -->
+            <a href="https://rayaantasnim.github.io/Novice-Assesments-/test.html" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-sapphire group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-sky-950/80 text-sky-300 border border-sky-500/30 tracking-wider">WING 02</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">🔬</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Novice Assessments
+                    </h2>
+                    <p class="text-xs sm:text-sm text-sky-200/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        Interactive Diagnostic Testing Suite
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-sky-300/80 group-hover:text-sky-200 transition-colors">
+                    <span>START ASSESSMENT</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- WING 03: Newbie Runway -->
+            <a href="https://rayaantasnim.github.io/For-the-newbie/" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-topaz group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-amber-950/80 text-amber-300 border border-amber-500/30 tracking-wider">WING 03</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">🚀</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Newbie Runway
+                    </h2>
+                    <p class="text-xs sm:text-sm text-amber-200/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        Beginner Onboarding Track
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-amber-300/80 group-hover:text-amber-200 transition-colors">
+                    <span>ENTER RUNWAY</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- WING 04: Asset Archive -->
+            <a href="https://github.com/rayaantasnim/PDF-Booklets" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-emerald group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 tracking-wider">WING 04</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">📂</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Asset Archive
+                    </h2>
+                    <p class="text-xs sm:text-sm text-emerald-200/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        PDF Booklets & Curated Library
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-emerald-300/80 group-hover:text-emerald-200 transition-colors">
+                    <span>BROWSE REPOSITORY</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- WING 05: PrimeFactor Arena -->
+            <a href="https://rayaantasnim.github.io/Prime-Factorization-Web/" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-ruby group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl group-hover:bg-rose-500/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-rose-950/80 text-rose-300 border border-rose-500/30 tracking-wider">WING 05</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">⏱️</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Prime Factor Arena
+                    </h2>
+                    <p class="text-xs sm:text-sm text-rose-200/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        Math Speed Drills & Web Arena
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-rose-300/80 group-hover:text-rose-200 transition-colors">
+                    <span>ENTER ARENA</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- WING 06: Quantum Engine -->
+            <a href="https://rayaantasnim.github.io/Prime-Factor/calculator.html" target="_blank" rel="noopener noreferrer" 
+               class="wing-card gem-diamond group relative rounded-2xl p-5 sm:p-6 backdrop-blur-xl flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-slate-300/10 rounded-full blur-2xl group-hover:bg-slate-300/25 transition-all"></div>
+                
+                <div class="translate-z-badge flex items-center justify-between mb-4 sm:mb-6">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded-md bg-slate-800/90 text-slate-200 border border-slate-400/40 tracking-wider">WING 06</span>
+                    <span class="text-3xl sm:text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">⚡</span>
+                </div>
+
+                <div class="translate-z-content space-y-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase truncate leading-snug">
+                        Quantum Engine
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300/70 font-normal leading-relaxed truncate" style="font-family: var(--font-secondary);">
+                        Advanced Computational Calculator
+                    </p>
+                </div>
+
+                <div class="translate-z-badge mt-6 flex items-center justify-between text-xs font-semibold text-slate-200/90 group-hover:text-white transition-colors">
+                    <span>LAUNCH CALCULATOR</span>
+                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+
+    <!-- PLATFORM FOOTER -->
+    <footer id="footer" class="w-full border-t border-white/10 bg-[#030107]/90 backdrop-blur-xl py-12 px-6">
+      <div class="max-w-4xl mx-auto flex flex-col items-center justify-center text-center space-y-4">
+        <!-- Back to Top Button -->
+        <a href="#hero" class="w-10 h-10 rounded-full glass-panel border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:border-pink-500 transition-colors shadow-lg">
+          ↑
+        </a>
+
+        <!-- Exact mandated footer text -->
+        <p class="font-mono text-sm sm:text-base text-slate-200 tracking-wide font-medium">
+          © Olympiad Edge | Authorized By Rayaan Tasnim | All rights reserved
+        </p>
+
+        <p class="text-xs font-mono text-slate-500">
+          Deterministic Algorithmic Discipline Converged With Modern Cloud Software Architecture
+        </p>
+      </div>
+    </footer>
+  <!-- ========================================================================= -->
+  <!-- HIGH-VELOCITY JAVASCRIPT ENGINE -->
+  <!-- ========================================================================= -->
+  
+  <script src="script.js"></script>
+  <script src="button.js"></script>
+  <script src="deta.js"></script>
+</body>
+</html>

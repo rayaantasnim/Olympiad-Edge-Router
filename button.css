@@ -1,0 +1,93 @@
+
+
+        /* 3D Perspective Canvas Container */
+        .perspective-container {
+            perspective: 1200px;
+        }
+
+        /* Card Card Surface Component Base */
+        .wing-card {
+            transform-style: preserve-3d;
+            transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        /* Gemstone Distinct Styles and Glowing Shadows */
+        /* Wing 01: Amethyst Violet */
+        .gem-amethyst {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(168, 85, 247, 0.4);
+        }
+        .gem-amethyst:hover {
+            border-color: rgba(192, 132, 252, 0.9);
+            box-shadow: 0 12px 35px -5px rgba(168, 85, 247, 0.5), inset 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Wing 02: Sapphire Blue */
+        .gem-sapphire {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(14, 165, 233, 0.4);
+        }
+        .gem-sapphire:hover {
+            border-color: rgba(56, 189, 248, 0.9);
+            box-shadow: 0 12px 35px -5px rgba(14, 165, 233, 0.5), inset 0 0 20px rgba(14, 165, 233, 0.2);
+        }
+
+        /* Wing 03: Topaz Gold */
+        .gem-topaz {
+            background: linear-gradient(135deg, rgba(120, 53, 15, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(245, 158, 11, 0.4);
+        }
+        .gem-topaz:hover {
+            border-color: rgba(251, 191, 36, 0.9);
+            box-shadow: 0 12px 35px -5px rgba(245, 158, 11, 0.5), inset 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Wing 04: Emerald Jade */
+        .gem-emerald {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.4);
+        }
+        .gem-emerald:hover {
+            border-color: rgba(52, 211, 153, 0.9);
+            box-shadow: 0 12px 35px -5px rgba(16, 185, 129, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Wing 05: Ruby Crimson */
+        .gem-ruby {
+            background: linear-gradient(135deg, rgba(136, 19, 55, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(244, 63, 94, 0.4);
+        }
+        .gem-ruby:hover {
+            border-color: rgba(251, 113, 133, 0.9);
+            box-shadow: 0 12px 35px -5px rgba(244, 63, 94, 0.5), inset 0 0 20px rgba(244, 63, 94, 0.2);
+        }
+
+        /* Wing 06: Diamond White */
+        .gem-diamond {
+            background: linear-gradient(135deg, rgba(71, 85, 105, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1.5px solid rgba(226, 232, 240, 0.4);
+        }
+        .gem-diamond:hover {
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 35px -5px rgba(226, 232, 240, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Inner 3D Elevation elements */
+        .translate-z-content {
+            transform: translateZ(35px);
+            transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .translate-z-badge {
+            transform: translateZ(20px);
+        }
+
+        /* Grid Background Pattern */
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
